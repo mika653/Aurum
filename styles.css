@@ -166,50 +166,98 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   line-height: 1.7;
 }
 
-/* --- Preloader --- */
+/* --- Preloader · Lotus bloom --- */
 .preloader {
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: var(--cream);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(212,175,55,0.06), transparent 60%),
+    var(--cream);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.6s var(--ease-out), visibility 0.6s;
+  transition: opacity 0.8s var(--ease-out), visibility 0.8s;
 }
-
 .preloader.hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
-
 .preloader-inner {
   text-align: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
 }
 
-.preloader-ring {
-  width: 64px;
-  height: 64px;
-  border: 1.5px solid var(--sand);
-  border-top-color: var(--gold-400);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto var(--space-lg);
+/* Lotus */
+.lotus {
+  color: var(--gold-700);
+  filter: drop-shadow(0 6px 24px rgba(212,175,55,0.25));
+}
+.lotus-petal {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  opacity: 0;
+  transform-box: fill-box;
+  animation: lotusBloom 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: calc(var(--i) * 0.10s);
+}
+.lotus-petal--inner {
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  opacity: 0;
+  stroke-width: 1.1;
+  animation: lotusBloomInner 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: calc(0.85s + (var(--i) - 8) * 0.08s);
+}
+@keyframes lotusBloom {
+  0%   { stroke-dashoffset: 220; opacity: 0; }
+  20%  { opacity: 0.75; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes lotusBloomInner {
+  0%   { stroke-dashoffset: 130; opacity: 0; }
+  20%  { opacity: 0.75; }
+  100% { stroke-dashoffset: 0; opacity: 0.85; }
+}
+.lotus-center {
+  fill: var(--gold-700);
+  stroke: none;
+  opacity: 0;
+  transform-origin: 100px 100px;
+  transform-box: fill-box;
+  animation: lotusCenter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1.6s forwards;
+}
+@keyframes lotusCenter {
+  0%   { opacity: 0; r: 0; }
+  100% { opacity: 1; r: 4; }
 }
 
 .preloader-text {
   font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 300;
-  letter-spacing: 0.3em;
-  color: var(--gold-600);
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.6em;
+  color: var(--gold-700);
   text-transform: uppercase;
+  text-indent: 0.6em; /* compensate for letter-spacing */
+  opacity: 0;
+  animation: lotusText 1.2s ease-out 1.8s forwards;
+}
+@keyframes lotusText {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: none; }
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+@media (prefers-reduced-motion: reduce) {
+  .lotus-petal, .lotus-petal--inner, .lotus-center, .preloader-text {
+    animation-duration: 0.4s;
+    animation-delay: 0s !important;
+  }
 }
 
 /* --- Header --- */

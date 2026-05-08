@@ -25,12 +25,16 @@
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-  // ---- Preloader ----
+  // ---- Preloader · keep visible long enough for the lotus to bloom ----
+  const PRELOAD_MIN_MS = 2600;
+  const preloadStart = performance.now();
   window.addEventListener('load', () => {
+    const elapsed = performance.now() - preloadStart;
+    const wait = Math.max(0, PRELOAD_MIN_MS - elapsed);
     setTimeout(() => {
       const preloader = $('#preloader');
       if (preloader) preloader.classList.add('hidden');
-    }, 600);
+    }, wait);
   });
 
   // ---- Header Scroll ----

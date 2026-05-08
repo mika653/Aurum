@@ -9,6 +9,16 @@
   const Store = window.AurumStore;
   if (!Store) { console.warn('AurumStore not loaded'); return; }
 
+  /* Preloader · keep visible long enough for the lotus to bloom */
+  const SN_PRELOAD_MIN_MS = 2800;
+  const snPreloadStart = performance.now();
+  window.addEventListener('load', () => {
+    const elapsed = performance.now() - snPreloadStart;
+    setTimeout(() => {
+      $('#snPreloader')?.classList.add('hidden');
+    }, Math.max(0, SN_PRELOAD_MIN_MS - elapsed));
+  });
+
   /* ---- Burger / drawer ---- */
   const burger = $('#snBurger');
   if (burger) {

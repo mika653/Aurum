@@ -1,29 +1,22 @@
 User-agent: *
 Allow: /
-
-# Block concept review and admin (internal only)
-Disallow: /iterations.html
 Disallow: /admin/
 
-# AI / AEO crawlers — explicit allow on public pages, public journal
+# AI / AEO crawlers — explicit allow on public pages
 User-agent: GPTBot
 Allow: /
-Disallow: /iterations.html
 Disallow: /admin/
 
 User-agent: ClaudeBot
 Allow: /
-Disallow: /iterations.html
 Disallow: /admin/
 
 User-agent: PerplexityBot
 Allow: /
-Disallow: /iterations.html
 Disallow: /admin/
 
 User-agent: Google-Extended
 Allow: /
-Disallow: /iterations.html
 Disallow: /admin/
 
 Sitemap: https://aurumwellness.ph/sitemap.xml
