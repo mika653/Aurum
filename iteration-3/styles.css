@@ -366,11 +366,11 @@ button { font-family: inherit; cursor: pointer; }
   aspect-ratio: 3/4;
   border-radius: var(--cl-r-lg);
   background:
-    linear-gradient(180deg, transparent 60%, rgba(15,15,16,0.18)),
-    url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80'),
+    linear-gradient(180deg, transparent 65%, rgba(15,15,16,0.12)),
+    url('../627046515_122117458179159395_5509610316692997982_n.jpg'),
     var(--cl-mist);
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   margin-bottom: 18px;
 }
 .cl-hero-card h3 {
@@ -674,11 +674,11 @@ button { font-family: inherit; cursor: pointer; }
   aspect-ratio: 4/5;
   border-radius: var(--cl-r-xl);
   background:
-    linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4)),
-    url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=900&q=80'),
+    linear-gradient(180deg, transparent 65%, rgba(0,0,0,0.25)),
+    url('../627046515_122117458179159395_5509610316692997982_n.jpg'),
     var(--cl-mist);
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   border: 1px solid rgba(212,178,91,0.2);
 }
 .cl-cv {
