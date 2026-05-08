@@ -150,6 +150,26 @@
     const maxDate = new Date(today);
     maxDate.setDate(maxDate.getDate() + 30);
     dateInput.max = `${maxDate.getFullYear()}-${String(maxDate.getMonth() + 1).padStart(2, '0')}-${String(maxDate.getDate()).padStart(2, '0')}`;
+    dateInput.addEventListener('change', refreshTimeAvailability);
+  }
+
+  // Disable booked time slots
+  function refreshTimeAvailability() {
+    if (!window.AurumStore || !dateInput || !dateInput.value) return;
+    const taken = window.AurumStore.takenSlotsFor(dateInput.value);
+    $$('.booking-time-option').forEach(label => {
+      const input = label.querySelector('input[type="radio"]');
+      if (!input) return;
+      const isTaken = taken.has(input.value);
+      input.disabled = isTaken;
+      label.classList.toggle('booking-time-option--taken', isTaken);
+      // If currently selected slot just became unavailable, clear it
+      if (isTaken && input.checked) input.checked = false;
+    });
+  }
+  refreshTimeAvailability();
+  if (window.AurumStore) {
+    window.AurumStore.subscribe(() => refreshTimeAvailability());
   }
 
   // Validation
@@ -323,20 +343,28 @@
     const email = $('#bookingEmail').value.trim();
     const notes = $('#bookingNotes').value.trim();
 
-    const booking = {
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-      service: serviceVal,
-      serviceName: service?.name,
-      duration: service?.duration,
-      price: service?.price,
-      date, time, name, phone, email, notes,
-      createdAt: new Date().toISOString(),
-    };
-
-    // Save to localStorage
-    const bookings = JSON.parse(localStorage.getItem('aurum_bookings') || '[]');
-    bookings.push(booking);
-    localStorage.setItem('aurum_bookings', JSON.stringify(bookings));
+    // Use shared store if available; fallback to legacy
+    let booking;
+    if (window.AurumStore) {
+      booking = window.AurumStore.create({
+        service: serviceVal, date, time, name, phone, email, notes,
+        source: 'iteration-1',
+      });
+    } else {
+      booking = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        service: serviceVal,
+        serviceName: service?.name,
+        duration: service?.duration,
+        price: service?.price,
+        date, time, name, phone, email, notes,
+        status: 'pending',
+        createdAt: new Date().toISOString(),
+      };
+      const bookings = JSON.parse(localStorage.getItem('aurum_bookings') || '[]');
+      bookings.push(booking);
+      localStorage.setItem('aurum_bookings', JSON.stringify(bookings));
+    }
 
     // Format for modal
     const d = new Date(date + 'T00:00:00');

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Aurum Aesthetic & Wellness</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="ad-body">
+
+  <!-- Demo notice -->
+  <div class="ad-demo-bar">
+    <span><strong>Demo dashboard</strong> — bookings persist locally in your browser via <code>localStorage</code>. No backend wired in this concept review.</span>
+    <div class="ad-demo-actions">
+      <button class="ad-btn ad-btn--ghost" id="adSeedBtn">↻ Seed demo data</button>
+      <button class="ad-btn ad-btn--ghost" id="adClearBtn">⌫ Clear all</button>
+    </div>
+  </div>
+
+  <div class="ad-shell">
+    <!-- Sidebar -->
+    <aside class="ad-sidebar">
+      <a href="../" class="ad-brand">
+        <span class="ad-brand-mark">Au</span>
+        <div>
+          <strong>Aurum</strong>
+          <small>Admin · v1.0</small>
+        </div>
+      </a>
+      <nav class="ad-nav">
+        <a class="ad-nav-link active" data-view="overview" href="#overview">
+          <span class="ad-nav-icon">▦</span> Overview
+        </a>
+        <a class="ad-nav-link" data-view="calendar" href="#calendar">
+          <span class="ad-nav-icon">▣</span> Calendar
+        </a>
+        <a class="ad-nav-link" data-view="bookings" href="#bookings">
+          <span class="ad-nav-icon">≡</span> All bookings
+        </a>
+        <a class="ad-nav-link" data-view="services" href="#services">
+          <span class="ad-nav-icon">✦</span> Services
+        </a>
+        <a class="ad-nav-link" data-view="patients" href="#patients">
+          <span class="ad-nav-icon">◉</span> Patients
+        </a>
+        <a class="ad-nav-link" data-view="settings" href="#settings">
+          <span class="ad-nav-icon">⚙</span> Settings
+        </a>
+      </nav>
+
+      <div class="ad-side-foot">
+        <a href="../iterations.html" class="ad-side-link">← Concept review</a>
+        <a href="../" class="ad-side-link">← Live site</a>
+        <p class="ad-side-blurb">© 2026 Aurum Aesthetic &amp; Wellness</p>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="ad-main">
+      <!-- Topbar -->
+      <header class="ad-topbar">
+        <div>
+          <h1 class="ad-title" id="adViewTitle">Overview</h1>
+          <p class="ad-sub" id="adViewSub">A quick read on today and the week ahead.</p>
+        </div>
+        <div class="ad-topbar-right">
+          <button class="ad-btn ad-btn--ghost" id="adExportBtn">↓ Export CSV</button>
+          <button class="ad-btn ad-btn--primary" id="adNewBtn">+ New booking</button>
+          <div class="ad-user">
+            <div class="ad-avatar">JM</div>
+            <div>
+              <strong>Dr. Magallanes</strong>
+              <small>Owner · admin@aurumwellness.ph</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ====== Overview view ====== -->
+      <section class="ad-view ad-view--active" data-view="overview">
+        <div class="ad-stats">
+          <article class="ad-stat">
+            <span class="ad-stat-label">Today</span>
+            <strong class="ad-stat-num" id="adStatToday">0</strong>
+            <span class="ad-stat-trail">appointments</span>
+          </article>
+          <article class="ad-stat">
+            <span class="ad-stat-label">Upcoming (30d)</span>
+            <strong class="ad-stat-num" id="adStatUpcoming">0</strong>
+            <span class="ad-stat-trail">across all services</span>
+          </article>
+          <article class="ad-stat">
+            <span class="ad-stat-label">Pending review</span>
+            <strong class="ad-stat-num" id="adStatPending">0</strong>
+            <span class="ad-stat-trail">need confirmation</span>
+          </article>
+          <article class="ad-stat">
+            <span class="ad-stat-label">Revenue (completed)</span>
+            <strong class="ad-stat-num" id="adStatRevenue">₱0</strong>
+            <span class="ad-stat-trail">all-time</span>
+          </article>
+        </div>
+
+        <div class="ad-row">
+          <section class="ad-card ad-card--span2">
+            <header class="ad-card-head">
+              <h2>Today &amp; tomorrow</h2>
+              <span class="ad-card-mute" id="adTodayDate"></span>
+            </header>
+            <div class="ad-today-list" id="adTodayList">
+              <p class="ad-empty">Nothing on the books for the next 48 hours.</p>
+            </div>
+          </section>
+
+          <section class="ad-card">
+            <header class="ad-card-head">
+              <h2>Service mix</h2>
+              <span class="ad-card-mute">last 30 days</span>
+            </header>
+            <div class="ad-chart" id="adServiceMix"></div>
+          </section>
+        </div>
+
+        <section class="ad-card">
+          <header class="ad-card-head">
+            <h2>Source breakdown</h2>
+            <span class="ad-card-mute">where bookings are coming from</span>
+          </header>
+          <div class="ad-source-grid" id="adSourceGrid"></div>
+        </section>
+      </section>
+
+      <!-- ====== Calendar view ====== -->
+      <section class="ad-view" data-view="calendar">
+        <div class="ad-cal-toolbar">
+          <div class="ad-cal-nav">
+            <button class="ad-icon-btn" id="adCalPrev" aria-label="Previous month">←</button>
+            <h2 id="adCalLabel">—</h2>
+            <button class="ad-icon-btn" id="adCalNext" aria-label="Next month">→</button>
+            <button class="ad-btn ad-btn--ghost ad-btn--sm" id="adCalToday">Today</button>
+          </div>
+          <div class="ad-cal-modes">
+            <button class="ad-cal-mode active" data-mode="month">Month</button>
+            <button class="ad-cal-mode" data-mode="week">Week</button>
+            <button class="ad-cal-mode" data-mode="day">Day</button>
+          </div>
+        </div>
+
+        <div class="ad-cal-stage">
+          <!-- Month grid -->
+          <div class="ad-cal ad-cal--month" id="adCalMonth"></div>
+          <!-- Week timeline -->
+          <div class="ad-cal ad-cal--week hidden" id="adCalWeek"></div>
+          <!-- Day timeline -->
+          <div class="ad-cal ad-cal--day hidden" id="adCalDay"></div>
+        </div>
+      </section>
+
+      <!-- ====== Bookings view ====== -->
+      <section class="ad-view" data-view="bookings">
+        <div class="ad-filter-bar">
+          <input type="search" id="adSearch" placeholder="Search by name, phone, ref…" class="ad-search">
+          <select id="adFilterStatus" class="ad-select">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="no-show">No-show</option>
+          </select>
+          <select id="adFilterService" class="ad-select">
+            <option value="">All services</option>
+          </select>
+          <select id="adSort" class="ad-select">
+            <option value="date-asc">Date · soonest first</option>
+            <option value="date-desc">Date · latest first</option>
+            <option value="created-desc" selected>Created · newest first</option>
+            <option value="created-asc">Created · oldest first</option>
+          </select>
+        </div>
+        <div class="ad-table-wrap">
+          <table class="ad-table">
+            <thead>
+              <tr>
+                <th>Date · Time</th>
+                <th>Patient</th>
+                <th>Service</th>
+                <th>Source</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====== Services view ====== -->
+      <section class="ad-view" data-view="services">
+        <div class="ad-card">
+          <header class="ad-card-head">
+            <h2>Service catalogue</h2>
+            <span class="ad-card-mute">canonical list shared by all three iterations</span>
+          </header>
+          <div class="ad-service-list" id="adServiceList"></div>
+        </div>
+      </section>
+
+      <!-- ====== Patients view ====== -->
+      <section class="ad-view" data-view="patients">
+        <div class="ad-card">
+          <header class="ad-card-head">
+            <h2>Patients</h2>
+            <span class="ad-card-mute">deduplicated by phone</span>
+          </header>
+          <div class="ad-patients-list" id="adPatientsList"></div>
+        </div>
+      </section>
+
+      <!-- ====== Settings view ====== -->
+      <section class="ad-view" data-view="settings">
+        <div class="ad-card">
+          <header class="ad-card-head">
+            <h2>Settings</h2>
+            <span class="ad-card-mute">demo only</span>
+          </header>
+          <div class="ad-settings">
+            <div class="ad-setting-row">
+              <div>
+                <strong>Clinic hours</strong>
+                <p>Daily, 09:00 – 20:00</p>
+              </div>
+              <span class="ad-pill">Editable in production</span>
+            </div>
+            <div class="ad-setting-row">
+              <div>
+                <strong>Booking window</strong>
+                <p>Up to 30 days in advance</p>
+              </div>
+              <span class="ad-pill">Editable in production</span>
+            </div>
+            <div class="ad-setting-row">
+              <div>
+                <strong>Notifications</strong>
+                <p>SMS via Twilio · Email via Resend (template ready)</p>
+              </div>
+              <span class="ad-pill ad-pill--mute">Wire backend to enable</span>
+            </div>
+            <div class="ad-setting-row">
+              <div>
+                <strong>Storage location</strong>
+                <p><code>localStorage["aurum_bookings"]</code></p>
+              </div>
+              <span class="ad-pill ad-pill--warn">Demo</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Booking detail drawer -->
+  <aside class="ad-drawer" id="adDrawer" aria-hidden="true">
+    <div class="ad-drawer-overlay" id="adDrawerOverlay"></div>
+    <div class="ad-drawer-panel">
+      <header class="ad-drawer-head">
+        <span class="ad-mono" id="adDrawerRef">Ref</span>
+        <button class="ad-icon-btn" id="adDrawerClose" aria-label="Close">×</button>
+      </header>
+      <div id="adDrawerBody"></div>
+    </div>
+  </aside>
+
+  <!-- New booking modal -->
+  <div class="ad-modal" id="adNewModal" aria-hidden="true">
+    <div class="ad-modal-overlay" id="adNewOverlay"></div>
+    <div class="ad-modal-card">
+      <header class="ad-modal-head">
+        <h3>New booking</h3>
+        <button class="ad-icon-btn" id="adNewClose" aria-label="Close">×</button>
+      </header>
+      <form class="ad-form" id="adNewForm">
+        <div class="ad-form-row">
+          <label>Service<select id="anService" required></select></label>
+          <label>Status<select id="anStatus">
+            <option value="pending">Pending</option>
+            <option value="confirmed" selected>Confirmed</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="no-show">No-show</option>
+          </select></label>
+        </div>
+        <div class="ad-form-row">
+          <label>Date<input type="date" id="anDate" required></label>
+          <label>Time<select id="anTime" required></select></label>
+        </div>
+        <div class="ad-form-row">
+          <label>Patient name<input type="text" id="anName" required></label>
+          <label>Phone<input type="tel" id="anPhone" required></label>
+        </div>
+        <div class="ad-form-row">
+          <label>Email<input type="email" id="anEmail"></label>
+          <label>Source<select id="anSource">
+            <option value="walk-in">Walk-in</option>
+            <option value="phone">Phone</option>
+            <option value="iteration-1">Site · Modern Gold</option>
+            <option value="iteration-2">Site · Editorial Gold</option>
+            <option value="iteration-3">Site · Clinical Lux</option>
+          </select></label>
+        </div>
+        <label>Notes<textarea id="anNotes" rows="3"></textarea></label>
+        <div class="ad-form-actions">
+          <button type="button" class="ad-btn ad-btn--ghost" id="anCancel">Cancel</button>
+          <button type="submit" class="ad-btn ad-btn--primary">Save booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="ad-toast" id="adToast" role="status" aria-live="polite"></div>
+
+  <script src="../shared/booking-store.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
