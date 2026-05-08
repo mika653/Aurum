@@ -113,7 +113,6 @@ body > * { position: relative; z-index: 1; }
   background: rgba(251,246,232,0.92);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(31,77,59,0.10);
-  margin-top: 50px;
 }
 .sn-header-inner {
   max-width: 1200px;

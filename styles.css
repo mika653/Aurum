@@ -2007,9 +2007,6 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   .concept-banner-text strong { display: none; }
 }
 
-/* push header below banner */
-.header { margin-top: 40px; }
-@media (max-width: 700px) { .header { margin-top: 36px; } }
 
 /* ============================================
    GOLD CIRCLE MEMBERSHIP

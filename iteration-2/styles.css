@@ -66,7 +66,6 @@ button { font-family: inherit; cursor: pointer; }
   background: rgba(251,246,236,0.92);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(28,20,16,0.10);
-  margin-top: 50px;
 }
 .ed-header-inner {
   max-width: var(--ed-container);
