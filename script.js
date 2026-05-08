@@ -5,26 +5,21 @@
 (function () {
   'use strict';
 
-  // ---- Service Data ----
-  const SERVICES = {
-    // Aesthetic Treatments
-    'botox':         { name: 'Botox', duration: '30 min', price: null, priceLabel: 'Consultation' },
-    'fillers':       { name: 'Dermal Fillers', duration: '45 min', price: null, priceLabel: 'Consultation' },
-    'thread-lift':   { name: 'Thread Lift', duration: '60 min', price: null, priceLabel: 'Consultation' },
-    'laser':         { name: 'Laser Treatment', duration: '30–60 min', price: 500, priceLabel: 'From ₱500' },
-    'gluta-drip':    { name: 'IV Drip Therapy', duration: '45–60 min', price: 1500, priceLabel: 'From ₱1,500' },
-    'prp':           { name: 'PRP Therapy', duration: '60 min', price: null, priceLabel: 'Consultation' },
-    // Skin Care
-    'hydrafacial':   { name: 'Hydrafacial', duration: '45 min', price: 2000, priceLabel: 'From ₱2,000' },
-    'chemical-peel': { name: 'Chemical Peel', duration: '30 min', price: 1500, priceLabel: 'From ₱1,500' },
-    'microneedling': { name: 'Microneedling', duration: '45 min', price: 3000, priceLabel: 'From ₱3,000' },
-    'wart-removal':  { name: 'Wart & Mole Removal', duration: '15–30 min', price: 500, priceLabel: 'From ₱500' },
-    // Wellness
-    'hilot':         { name: 'Hilot Massage', duration: '60 min', price: 500, priceLabel: '₱500' },
-    'swedish':       { name: 'Swedish Massage', duration: '60 min', price: 600, priceLabel: '₱600' },
-    'deep-tissue':   { name: 'Deep Tissue Massage', duration: '60 min', price: 700, priceLabel: '₱700' },
-    'post-flight':   { name: 'Post-Flight Recovery', duration: '90 min', price: 1200, priceLabel: '₱1,200' },
-  };
+  // ---- Service Data (proxied through shared store with display-friendly duration) ----
+  const SERVICES = (() => {
+    if (window.AurumStore && window.AurumStore.SERVICES) {
+      const out = {};
+      Object.entries(window.AurumStore.SERVICES).forEach(([k, s]) => {
+        out[k] = { name: s.name, duration: s.duration + ' min', price: s.price, priceLabel: s.priceLabel };
+      });
+      return out;
+    }
+    // Legacy fallback
+    return {
+      'botox': { name: 'Botox', duration: '30 min', price: null, priceLabel: 'Consultation' },
+      'fillers': { name: 'Dermal Fillers', duration: '45 min', price: null, priceLabel: 'Consultation' },
+    };
+  })();
 
   // ---- DOM Refs ----
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -99,6 +94,69 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   $$('.scroll-reveal').forEach(el => revealObserver.observe(el));
+
+  // ---- Promotions Render ----
+  function renderPromos() {
+    const mount = $('#promosMount');
+    if (!mount || !window.AurumStore || !window.AurumStore.PROMOS) return;
+    mount.innerHTML = window.AurumStore.PROMOS.map(p => `
+      <article class="promo-card">
+        <div class="promo-card-poster" style="background-image:url('${p.image}')" role="img" aria-label="${p.title}">
+          <span class="promo-card-occasion">${p.occasion}</span>
+        </div>
+        <div class="promo-card-body">
+          <header class="promo-card-headline">
+            <p class="promo-card-kicker">${p.kicker}</p>
+            <h3 class="promo-card-title">${p.title}</h3>
+            <span class="promo-card-tagline">${p.tagline}</span>
+          </header>
+          <div class="promo-card-pkgs">
+            ${p.packages.map(pkg => `
+              <div class="promo-card-pkg">
+                <div class="promo-card-pkg-head">
+                  <span class="promo-card-pkg-no">№ ${pkg.no}</span>
+                  <span class="promo-card-pkg-name">${pkg.name}</span>
+                  ${pkg.price ? `<span class="promo-card-pkg-price">${pkg.price}${pkg.subprice ? `<small>${pkg.subprice}</small>` : ''}</span>` : ''}
+                </div>
+                <ul class="promo-card-pkg-extras">
+                  ${pkg.extras.map(x => `<li>${x}</li>`).join('')}
+                </ul>
+              </div>
+            `).join('')}
+          </div>
+          ${p.pillars ? `<div class="promo-card-pillars">${p.pillars.map(x => `<span>${x}</span>`).join('')}</div>` : ''}
+          ${p.addon ? `
+            <div class="promo-card-addon">
+              <div>
+                <strong>${p.addon.label}</strong>
+                <span class="promo-card-addon-note">${p.addon.note}</span>
+              </div>
+              <span class="promo-card-addon-price">${p.addon.price}</span>
+            </div>` : ''}
+          <p class="promo-card-foot">${p.footer}</p>
+          <div class="promo-card-cta">
+            <div class="promo-card-headline-price">
+              <span class="promo-card-price">${p.headlinePrice}</span>
+              <span class="promo-card-price-note">${p.headlinePriceNote}</span>
+            </div>
+            <button class="promo-card-book" data-promo="${p.bookKey}">Reserve →</button>
+          </div>
+        </div>
+      </article>
+    `).join('');
+    $$('.promo-card-book', mount).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const radio = $(`input[name="service"][value="${btn.dataset.promo}"]`);
+        if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
+        const target = $('#booking');
+        if (target) {
+          const offset = header.offsetHeight + 16;
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+  renderPromos();
 
   // ---- Service Card Book Buttons ----
   $$('.service-card-book').forEach(btn => {

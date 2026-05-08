@@ -76,7 +76,7 @@
       </a>
       <nav class="ed-nav" aria-label="Primary">
         <a href="#manifesto">Manifesto</a>
-        <a href="#atelier">Atelier</a>
+        <a href="#promos" class="ed-nav-feature">Specials</a>
         <a href="#carte">Carte</a>
         <a href="#circle">Gold Circle</a>
         <a href="../journal/">Journal</a>
@@ -199,11 +199,24 @@
     </div>
   </section>
 
+  <!-- Mother's Day Specials -->
+  <section class="ed-promos" id="promos">
+    <div class="ed-container">
+      <div class="ed-section-head">
+        <span class="ed-section-no">§ 03</span>
+        <h2 class="ed-section-title">A capsule, for the women.</h2>
+        <p class="ed-section-deck">Three Mother's Day collections, prepared in collaboration with our atelier. Pricing valid through <em>20 May 2026</em>.</p>
+      </div>
+      <div class="ed-promos-grid" id="edPromosMount"></div>
+      <p class="ed-promos-fineprint">Promotional bookings remain subject to physician screening. Promos are not combinable with Gold Circle member discounts.</p>
+    </div>
+  </section>
+
   <!-- Carte (Services) -->
   <section class="ed-carte" id="carte">
     <div class="ed-container">
       <div class="ed-section-head">
-        <span class="ed-section-no">§ 03</span>
+        <span class="ed-section-no">§ 04</span>
         <h2 class="ed-section-title">The carte.</h2>
         <p class="ed-section-deck">Every service is offered <em>by the half-hour</em>, with no upsells whispered mid-treatment. Consultations are complimentary and never transactional.</p>
       </div>
@@ -331,7 +344,7 @@
     <div class="ed-feature-grid">
       <div class="ed-feature-img" aria-hidden="true"></div>
       <div class="ed-feature-text">
-        <span class="ed-section-no">§ 04 · Profile</span>
+        <span class="ed-section-no">§ 05 · Profile</span>
         <h2 class="ed-feature-title"><em>The doctor</em> who came home.</h2>
         <p>Dr. Josefa A. Magallanes — Berry, to those who know her — trained as an anesthesiologist at Asia Pacific Medical Center, where she still practices. She returned to Kalibo not because she had to, but because she chose to. Aurum was opened in 2026, on a quiet street in Poblacion, with three rules nailed above the door:</p>
         <ol class="ed-feature-list">
@@ -348,7 +361,7 @@
   <section class="ed-book" id="book">
     <div class="ed-container">
       <div class="ed-section-head ed-section-head--center">
-        <span class="ed-section-no">§ 05</span>
+        <span class="ed-section-no">§ 06</span>
         <h2 class="ed-section-title">Reserve a session.</h2>
         <p class="ed-section-deck">A short form, lightly composed. We confirm by phone within the hour.</p>
       </div>
@@ -358,25 +371,41 @@
             <label>Treatment</label>
             <select id="edService" required>
               <option value="">— select a treatment —</option>
+              <optgroup label="♡ Mother's Day Specials">
+                <option value="promo-super-moms">Smooth Secrets — for 2 · ₱1,880</option>
+                <option value="promo-slim-glow">Slim, Glow &amp; Shine · From ₱980</option>
+                <option value="promo-timeless-glow">Timeless Glow For Mom · From ₱580</option>
+              </optgroup>
               <optgroup label="Aesthetic Medicine">
                 <option value="botox">Botox</option>
                 <option value="fillers">Dermal Fillers</option>
                 <option value="thread-lift">Thread Lift</option>
+                <option value="hifu">HIFU Treatment</option>
+                <option value="rf-treatment">RF Treatment</option>
+                <option value="cavitation">Cavitation</option>
                 <option value="prp">PRP Therapy</option>
                 <option value="gluta-drip">IV Drip Therapy</option>
-                <option value="laser">Laser</option>
+              </optgroup>
+              <optgroup label="Laser">
+                <option value="diode-laser">Diode Laser Hair Removal</option>
+                <option value="pico-laser">Pico Laser Whitening</option>
+                <option value="carbon-peel">Carbon Laser Peel (Blackdoll)</option>
+                <option value="laser">Other Laser</option>
               </optgroup>
               <optgroup label="Skin Care">
+                <option value="aurum-hydra">Aurum Signature Hydrafacial · 24K Gold</option>
                 <option value="hydrafacial">Hydrafacial</option>
+                <option value="diamond-peel">Diamond Peel</option>
                 <option value="chemical-peel">Chemical Peel</option>
                 <option value="microneedling">Microneedling</option>
-                <option value="wart-removal">Wart & Mole Removal</option>
+                <option value="wart-removal">Wart &amp; Mole Removal</option>
               </optgroup>
               <optgroup label="Heritage Bodywork">
                 <option value="hilot">Hilot</option>
                 <option value="swedish">Swedish</option>
                 <option value="deep-tissue">Deep Tissue</option>
                 <option value="post-flight">Post-Flight Recovery</option>
+                <option value="mani-pedi">Mani / Pedi</option>
               </optgroup>
             </select>
           </div>
@@ -419,7 +448,7 @@
   <section class="ed-circle" id="circle">
     <div class="ed-container">
       <div class="ed-section-head">
-        <span class="ed-section-no">§ 06</span>
+        <span class="ed-section-no">§ 07</span>
         <h2 class="ed-section-title">The Gold Circle.</h2>
         <p class="ed-section-deck">Membership is by intention, not invitation. Pause anytime, return whenever.</p>
       </div>
@@ -477,7 +506,7 @@
   <section class="ed-reviews">
     <div class="ed-container">
       <div class="ed-section-head">
-        <span class="ed-section-no">§ 07</span>
+        <span class="ed-section-no">§ 08</span>
         <h2 class="ed-section-title">In their words.</h2>
       </div>
       <div class="ed-reviews-grid">
@@ -501,7 +530,7 @@
   <section class="ed-faq">
     <div class="ed-container">
       <div class="ed-section-head">
-        <span class="ed-section-no">§ 08</span>
+        <span class="ed-section-no">§ 09</span>
         <h2 class="ed-section-title">Practical matters.</h2>
       </div>
       <div class="ed-faq-list">
@@ -534,7 +563,7 @@
     <div class="ed-container">
       <div class="ed-visit-grid">
         <div>
-          <span class="ed-section-no">§ 09</span>
+          <span class="ed-section-no">§ 10</span>
           <h2 class="ed-section-title">The address.</h2>
           <address class="ed-visit-add">
             Aurum Aesthetic &amp; Wellness<br>

@@ -15,21 +15,136 @@
 
   /* ---- Service catalog (canonical) ---- */
   const SERVICES = {
+    // Aesthetic Medicine (doctor-led)
     'botox':         { name: 'Botox', category: 'Aesthetic', duration: 30, price: null, priceLabel: 'Consultation', doctorLed: true },
     'fillers':       { name: 'Dermal Fillers', category: 'Aesthetic', duration: 45, price: null, priceLabel: 'Consultation', doctorLed: true },
     'thread-lift':   { name: 'Thread Lift', category: 'Aesthetic', duration: 60, price: null, priceLabel: 'Consultation', doctorLed: true },
-    'laser':         { name: 'Laser Treatment', category: 'Aesthetic', duration: 45, price: 500, priceLabel: 'From ₱500', doctorLed: true },
+    'hifu':          { name: 'HIFU Treatment', category: 'Aesthetic', duration: 60, price: 5380, priceLabel: 'From ₱5,380', doctorLed: true },
+    'rf-treatment':  { name: 'RF Treatment', category: 'Aesthetic', duration: 60, price: 980, priceLabel: 'From ₱980', doctorLed: false },
+    'cavitation':    { name: 'Cavitation', category: 'Aesthetic', duration: 45, price: 800, priceLabel: 'From ₱800', doctorLed: false },
     'gluta-drip':    { name: 'IV Drip Therapy', category: 'Aesthetic', duration: 60, price: 1500, priceLabel: 'From ₱1,500', doctorLed: true },
     'prp':           { name: 'PRP Therapy', category: 'Aesthetic', duration: 60, price: null, priceLabel: 'Consultation', doctorLed: true },
+    // Lasers
+    'diode-laser':   { name: 'Diode Laser Hair Removal', category: 'Laser', duration: 30, price: 500, priceLabel: 'From ₱500', doctorLed: false },
+    'pico-laser':    { name: 'Pico Laser Whitening', category: 'Laser', duration: 30, price: 800, priceLabel: 'From ₱800', doctorLed: false },
+    'carbon-peel':   { name: 'Carbon Laser Peel (Blackdoll)', category: 'Laser', duration: 45, price: 1500, priceLabel: 'From ₱1,500', doctorLed: false },
+    'laser':         { name: 'Other Laser Treatments', category: 'Laser', duration: 45, price: 500, priceLabel: 'From ₱500', doctorLed: true },
+    // Skin Care
     'hydrafacial':   { name: 'Hydrafacial', category: 'Skin Care', duration: 45, price: 2000, priceLabel: 'From ₱2,000', doctorLed: false },
+    'aurum-hydra':   { name: 'Aurum Signature Hydrafacial', category: 'Skin Care', duration: 60, price: 2380, priceLabel: '₱2,380 (24K Gold)', doctorLed: false },
     'chemical-peel': { name: 'Chemical Peel', category: 'Skin Care', duration: 30, price: 1500, priceLabel: 'From ₱1,500', doctorLed: false },
+    'diamond-peel':  { name: 'Diamond Peel', category: 'Skin Care', duration: 30, price: 580, priceLabel: 'From ₱580', doctorLed: false },
     'microneedling': { name: 'Microneedling', category: 'Skin Care', duration: 45, price: 3000, priceLabel: 'From ₱3,000', doctorLed: false },
     'wart-removal':  { name: 'Wart & Mole Removal', category: 'Skin Care', duration: 30, price: 500, priceLabel: 'From ₱500', doctorLed: true },
+    // Wellness & Heritage
     'hilot':         { name: 'Hilot Massage', category: 'Wellness', duration: 60, price: 500, priceLabel: '₱500', doctorLed: false },
     'swedish':       { name: 'Swedish Massage', category: 'Wellness', duration: 60, price: 600, priceLabel: '₱600', doctorLed: false },
     'deep-tissue':   { name: 'Deep Tissue Massage', category: 'Wellness', duration: 60, price: 700, priceLabel: '₱700', doctorLed: false },
     'post-flight':   { name: 'Post-Flight Recovery', category: 'Wellness', duration: 90, price: 1200, priceLabel: '₱1,200', doctorLed: false },
+    'mani-pedi':     { name: 'Mani / Pedi', category: 'Wellness', duration: 60, price: 580, priceLabel: 'From ₱580', doctorLed: false },
+    // Mother's Day promo packages (booked as units)
+    'promo-super-moms':    { name: 'Smooth Secrets — for 2', category: 'Promotion', duration: 60, price: 1880, priceLabel: '₱1,880 (2 persons)', doctorLed: false, promo: 'super-moms' },
+    'promo-slim-glow':     { name: 'Slim, Glow & Shine Package', category: 'Promotion', duration: 75, price: 980,  priceLabel: 'From ₱980', doctorLed: false, promo: 'slim-glow' },
+    'promo-timeless-glow': { name: 'Timeless Glow For Mom',     category: 'Promotion', duration: 60, price: 580,  priceLabel: 'From ₱580', doctorLed: false, promo: 'timeless-glow' },
   };
+
+  /* ---- Live promotions (Mother's Day collection) ---- */
+  const PROMOS = [
+    {
+      id: 'super-moms',
+      title: 'Smooth Secrets',
+      tagline: 'for Super Moms',
+      kicker: 'Underarm glow-up · for 2 persons',
+      occasion: "Mother's Day Limited",
+      validUntil: '2026-05-20',
+      image: 'assets/promos/promo-1-super-moms.jpg',
+      headlinePrice: '₱1,880',
+      headlinePriceNote: 'for 2 persons',
+      bookKey: 'promo-super-moms',
+      packages: [
+        {
+          no: '01',
+          name: 'Diode Underarm Hair Removal',
+          extras: ['FREE Light Therapy', 'FREE 24K Gold Serum'],
+        },
+        {
+          no: '02',
+          name: 'Pico Underarm Whitening',
+          extras: ['FREE Blackdoll Cream', 'FREE Light Therapy'],
+        },
+      ],
+      footer: 'Glow with confidence. Love yourself. You deserve it.',
+    },
+    {
+      id: 'slim-glow',
+      title: 'Slim, Glow & Shine',
+      tagline: 'just for her',
+      kicker: 'Body sculpting · RF + HIFU collection',
+      occasion: "Mother's Day Limited",
+      validUntil: '2026-05-20',
+      image: 'assets/promos/promo-2-slim-glow.jpg',
+      headlinePrice: '₱980',
+      headlinePriceNote: 'starting price',
+      bookKey: 'promo-slim-glow',
+      packages: [
+        {
+          no: '01',
+          name: 'RF Face & RF Arms',
+          price: '₱980',
+          extras: ['Cavitation', 'RF Vacuum', 'RF Light Therapy', 'FREE Mani / Pedi Companion'],
+        },
+        {
+          no: '02',
+          name: 'RF Arms & RF Abdomen',
+          price: '₱980',
+          extras: ['Cavitation', 'RF Vacuum', 'RF Light Therapy', 'FREE Mani / Pedi Companion'],
+        },
+        {
+          no: '03',
+          name: 'HIFU Treatment',
+          price: 'From ₱5,380',
+          subprice: 'Any area · from ₱8,880',
+          extras: ['10 ml FREE Blue Peptide Serum'],
+        },
+      ],
+      pillars: ['Tighten · Tone · Transform', 'Sculpt your body with confidence', 'Radiate beauty inside &amp; out'],
+      footer: 'You deserve to feel beautiful, confident and unstoppable.',
+    },
+    {
+      id: 'timeless-glow',
+      title: 'Timeless Glow',
+      tagline: 'For Mom',
+      kicker: 'Because she deserves timeless beauty',
+      occasion: "Mother's Day Limited",
+      validUntil: '2026-05-20',
+      image: 'assets/promos/promo-3-timeless-glow.jpg',
+      headlinePrice: '₱580',
+      headlinePriceNote: 'starting price',
+      bookKey: 'promo-timeless-glow',
+      packages: [
+        {
+          no: '01',
+          name: 'Smoother & Lifted Glow',
+          price: '₱580',
+          extras: ['FREE Classic Facial', 'FREE Diamond Peel for Face & Neck', 'FREE RF Contour for Face & Neck'],
+        },
+        {
+          no: '02',
+          name: 'Hydra Timeless All-In Anti-Aging',
+          price: '₱1,180',
+          extras: ['FREE Pico Whitening', 'FREE Blackdoll (Brightening & Firming)', 'FREE Light Therapy'],
+        },
+        {
+          no: '03',
+          name: 'Aurum Hydrafacial for 2',
+          price: '₱2,380',
+          extras: ['FREE 24K Gold Jelly Mask', 'FREE 24K Gold Serum', 'FREE Light Therapy'],
+        },
+      ],
+      addon: { label: 'Mani / Pedi for Mom', price: 'from ₱580', note: 'Special treat for mom' },
+      footer: 'Celebrate her. Cherish her. Make her glow.',
+    },
+  ];
 
   /* ---- Time grid (clinic hours 09:00 – 19:00, last start 19:00) ---- */
   const TIME_SLOTS = [
@@ -181,6 +296,9 @@
       { service: 'thread-lift', date: fmt(offset(3)), time: '10:00', name: 'Elena Castillo', phone: '+63 917 666 4040', email: 'elena@example.com', notes: 'Cheek + jowl lift. Pre-procedure photos requested.', status: 'confirmed', source: 'iteration-3' },
       { service: 'laser', date: fmt(offset(4)), time: '11:00', name: 'Mariko Tanaka', phone: '+81 80 1234 5678', email: 'mariko@example.com', notes: 'Underarm laser — session 3 of 6.', status: 'confirmed', source: 'iteration-2' },
       { service: 'microneedling', date: fmt(offset(5)), time: '14:00', name: 'Kim Soo-jin', phone: '+82 10 9876 5432', email: 'soojin@example.com', notes: 'Acne scars, mid-cheek.', status: 'pending', source: 'iteration-1' },
+      { service: 'promo-timeless-glow', date: fmt(offset(2)), time: '11:00', name: 'Maricel Aguinaldo', phone: '+63 917 414 1414', email: 'maricel@example.com', notes: "Mother's Day gift from her daughter.", status: 'confirmed', source: 'iteration-4' },
+      { service: 'promo-slim-glow', date: fmt(offset(3)), time: '15:00', name: 'Jasmine Ortega', phone: '+63 917 525 2525', email: '', notes: 'RF Face & Arms package.', status: 'confirmed', source: 'iteration-4' },
+      { service: 'hifu', date: fmt(offset(6)), time: '13:00', name: 'Liza Pacheco', phone: '+63 917 636 3636', email: 'liza@example.com', notes: 'Lower-face HIFU lift.', status: 'pending', source: 'iteration-3' },
       { service: 'swedish', date: fmt(offset(-1)), time: '16:00', name: 'Carlos Villanueva', phone: '+63 917 121 2121', email: '', notes: '', status: 'completed', source: 'iteration-1' },
       { service: 'chemical-peel', date: fmt(offset(-2)), time: '11:00', name: 'Sofia Martinez', phone: '+63 917 232 3232', email: 'sofia@example.com', notes: '', status: 'completed', source: 'iteration-3' },
       { service: 'prp', date: fmt(offset(-3)), time: '10:00', name: 'Daniel Cruz', phone: '+63 917 343 4343', email: 'dan@example.com', notes: '', status: 'no-show', source: 'iteration-2' },
@@ -237,6 +355,7 @@
   /* ---- Public API ---- */
   global.AurumStore = {
     SERVICES,
+    PROMOS,
     TIME_SLOTS,
     STATUSES,
     all, byId, byDate,

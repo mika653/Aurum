@@ -2147,6 +2147,196 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 }
 
 /* ============================================
+   PROMOTIONS (Mother's Day)
+   ============================================ */
+.promos {
+  padding: var(--space-5xl) 0;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(212,175,55,0.10), transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(43,92,91,0.06), transparent 50%),
+    linear-gradient(180deg, var(--ivory), var(--cream));
+}
+.promos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+@media (min-width: 1080px) { .promos-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.promo-card {
+  display: flex; flex-direction: column;
+  background: var(--cream);
+  border: 1px solid var(--gold-300);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out);
+  box-shadow: 0 1px 3px rgba(44,44,44,0.04), 0 8px 24px rgba(44,44,44,0.04);
+}
+.promo-card:hover { transform: translateY(-4px); border-color: var(--gold-500); box-shadow: 0 30px 60px rgba(212,175,55,0.18); }
+
+.promo-card-poster {
+  aspect-ratio: 4/5;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--ivory);
+  position: relative;
+  border-bottom: 1px solid var(--gold-300);
+}
+.promo-card-poster::after {
+  content: '';
+  position: absolute; inset: 12px;
+  border: 1px solid rgba(250,247,242,0.4);
+  pointer-events: none;
+}
+.promo-card-occasion {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--charcoal);
+  color: var(--gold-300);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  border: 1px solid var(--gold-400);
+}
+
+.promo-card-body {
+  padding: var(--space-2xl) var(--space-xl);
+  flex: 1;
+  display: flex; flex-direction: column;
+  gap: var(--space-md);
+}
+.promo-card-headline {
+  text-align: center;
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--sand);
+}
+.promo-card-kicker {
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--earth);
+  margin: 0 0 6px;
+}
+.promo-card-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.promo-card-tagline {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.32rem;
+  color: var(--gold-700);
+  margin-top: 4px;
+}
+
+.promo-card-pkgs { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.promo-card-pkg {
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  background: var(--ivory);
+}
+.promo-card-pkg-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--sand);
+}
+.promo-card-pkg-no {
+  background: var(--charcoal); color: var(--gold-300);
+  padding: 4px 11px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.promo-card-pkg-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--ink); flex: 1; letter-spacing: -0.005em; }
+.promo-card-pkg-price { font-family: var(--font-display); font-style: italic; color: var(--gold-700); font-size: 1rem; white-space: nowrap; }
+.promo-card-pkg-price small { display: block; font-size: 0.7rem; color: var(--earth); font-style: normal; }
+.promo-card-pkg-extras { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+.promo-card-pkg-extras li {
+  display: flex; gap: 6px; align-items: center;
+  font-size: 0.84rem;
+  color: var(--bark);
+}
+.promo-card-pkg-extras li::before { content: '✦'; color: var(--gold-700); font-size: 0.85em; }
+
+.promo-card-pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--teal-500), var(--teal-400));
+  color: var(--gold-300);
+  border-radius: var(--radius-md);
+  font-size: 0.7rem;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+.promo-card-pillars > span { padding: 0 4px; border-right: 1px solid rgba(212,175,55,0.3); line-height: 1.4; }
+.promo-card-pillars > span:last-child { border-right: 0; }
+
+.promo-card-addon {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: var(--ivory);
+  border: 1px dashed var(--gold-400);
+  border-radius: var(--radius-md);
+}
+.promo-card-addon strong { font-family: var(--font-display); font-size: 1rem; color: var(--ink); display: block; }
+.promo-card-addon-note { font-size: 0.78rem; color: var(--earth); font-style: italic; }
+.promo-card-addon-price { font-family: var(--font-display); font-style: italic; color: var(--gold-700); font-size: 0.95rem; }
+
+.promo-card-foot {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--earth);
+}
+
+.promo-card-cta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--sand);
+}
+.promo-card-headline-price { display: flex; flex-direction: column; line-height: 1; }
+.promo-card-price { font-family: var(--font-display); font-size: 2.2rem; font-weight: 600; color: var(--ink); letter-spacing: -0.02em; }
+.promo-card-price-note { font-size: 0.74rem; color: var(--earth); margin-top: 4px; }
+.promo-card-book {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--charcoal); color: var(--cream);
+  border: 0; border-radius: var(--radius-full);
+  padding: 11px 20px; font-size: 0.88rem; font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+.promo-card-book:hover { background: var(--gold-700); }
+
+.promos-fineprint {
+  text-align: center; margin-top: var(--space-2xl);
+  font-style: italic; color: var(--earth); font-size: 0.85rem;
+  font-family: var(--font-display);
+}
+
+/* nav accent */
+.nav-link--accent { color: var(--gold-700) !important; font-weight: 500; }
+
+/* ============================================
    FAQ
    ============================================ */
 .faq {

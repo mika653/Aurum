@@ -48,6 +48,70 @@
     });
   });
 
+  /* Render promos (Mother's Day) */
+  function renderPromos() {
+    const mount = $('#edPromosMount');
+    if (!mount || !Store || !Store.PROMOS) return;
+    mount.innerHTML = Store.PROMOS.map((p, i) => `
+      <article class="ed-promo">
+        <div class="ed-promo-poster" style="background-image:url('../${p.image}');" role="img" aria-label="${p.title}">
+          <span class="ed-promo-occasion">${p.occasion}</span>
+          <span class="ed-promo-no-stamp">N°&nbsp;${String(i+1).padStart(2,'0')}</span>
+        </div>
+        <div class="ed-promo-body">
+          <header class="ed-promo-headline">
+            <p class="ed-promo-kicker">${p.kicker}</p>
+            <h3 class="ed-promo-title">${p.title}</h3>
+            <span class="ed-promo-tagline">${p.tagline}</span>
+          </header>
+          <div class="ed-promo-pkgs">
+            ${p.packages.map(pkg => `
+              <div class="ed-promo-pkg">
+                <div class="ed-promo-pkg-head">
+                  <span class="ed-promo-pkg-no">${pkg.no}.</span>
+                  <span class="ed-promo-pkg-name">${pkg.name}</span>
+                  ${pkg.price ? `<span class="ed-promo-pkg-price">${pkg.price}${pkg.subprice ? `<small>${pkg.subprice}</small>` : ''}</span>` : ''}
+                </div>
+                <ul class="ed-promo-pkg-extras">
+                  ${pkg.extras.map(x => `<li>${x}</li>`).join('')}
+                </ul>
+              </div>
+            `).join('')}
+          </div>
+          ${p.pillars ? `<div class="ed-promo-pillars">${p.pillars.map(x => `<span>${x}</span>`).join('')}</div>` : ''}
+          ${p.addon ? `
+            <div class="ed-promo-addon">
+              <div>
+                <strong>${p.addon.label}</strong>
+                <span class="ed-promo-addon-note">${p.addon.note}</span>
+              </div>
+              <span class="ed-promo-addon-price">${p.addon.price}</span>
+            </div>` : ''}
+          <p class="ed-promo-foot">${p.footer}</p>
+          <div class="ed-promo-cta">
+            <div class="ed-promo-headline-price">
+              <span class="ed-promo-price">${p.headlinePrice}</span>
+              <span class="ed-promo-price-note">${p.headlinePriceNote}</span>
+            </div>
+            <button class="ed-promo-book" data-promo="${p.bookKey}">Reserve →</button>
+          </div>
+        </div>
+      </article>
+    `).join('');
+    $$('.ed-promo-book', mount).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sel = $('#edService');
+        if (sel) sel.value = btn.dataset.promo;
+        const target = $('#book');
+        if (target) {
+          const offset = ($('#edHeader')?.offsetHeight || 80) + 12;
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+  renderPromos();
+
   /* Reveal animations */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {

@@ -75,6 +75,7 @@
         <span class="cl-brand-text">Aurum<small>Clinic</small></span>
       </a>
       <nav class="cl-nav-links" aria-label="Primary">
+        <a href="#promos" class="cl-nav-feature">Specials</a>
         <a href="#protocol">Protocol</a>
         <a href="#services">Services</a>
         <a href="#evidence">Evidence</a>
@@ -144,6 +145,21 @@
       </div>
       <a href="#physician" class="cl-link">View full credentials →</a>
     </aside>
+  </section>
+
+  <!-- Mother's Day promotional offers -->
+  <section class="cl-promos" id="promos">
+    <div class="cl-container">
+      <header class="cl-section-head cl-section-head--split">
+        <div>
+          <span class="cl-tag">Mother's Day · Limited collection</span>
+          <h2>Three programmes, by appointment.</h2>
+        </div>
+        <p class="cl-deck">Promotional pricing is published below and valid through <strong>20 May 2026</strong>. Treatments remain subject to physician screening.</p>
+      </header>
+      <div class="cl-promos-grid" id="clPromosMount"></div>
+      <p class="cl-promos-fineprint">Promotional bookings cannot be combined with Gold Circle member discounts. All medical procedures are performed or supervised by Dr. Magallanes.</p>
+    </div>
   </section>
 
   <!-- Trust strip -->
@@ -334,16 +350,31 @@
             <label for="clService">Service</label>
             <select id="clService" required>
               <option value="">Choose a service…</option>
+              <optgroup label="Mother's Day Specials">
+                <option value="promo-super-moms">Smooth Secrets · for 2 · ₱1,880</option>
+                <option value="promo-slim-glow">Slim, Glow &amp; Shine · From ₱980</option>
+                <option value="promo-timeless-glow">Timeless Glow For Mom · From ₱580</option>
+              </optgroup>
               <optgroup label="Aesthetic Medicine">
                 <option value="botox">Botox · 30 min</option>
                 <option value="fillers">Dermal Fillers · 45 min</option>
                 <option value="thread-lift">Thread Lift · 60 min</option>
+                <option value="hifu">HIFU Treatment · 60 min · From ₱5,380</option>
+                <option value="rf-treatment">RF Treatment · 60 min · From ₱980</option>
+                <option value="cavitation">Cavitation · 45 min · From ₱800</option>
                 <option value="prp">PRP Therapy · 60 min</option>
                 <option value="gluta-drip">IV Drip Therapy · 45–60 min</option>
-                <option value="laser">Laser · 30–60 min</option>
+              </optgroup>
+              <optgroup label="Laser">
+                <option value="diode-laser">Diode Laser Hair Removal · 30 min</option>
+                <option value="pico-laser">Pico Laser Whitening · 30 min</option>
+                <option value="carbon-peel">Carbon Laser Peel (Blackdoll) · 45 min</option>
+                <option value="laser">Other Laser Treatments</option>
               </optgroup>
               <optgroup label="Skin Care">
+                <option value="aurum-hydra">Aurum Signature Hydrafacial · 24K Gold · 60 min</option>
                 <option value="hydrafacial">Hydrafacial · 45 min</option>
+                <option value="diamond-peel">Diamond Peel · 30 min</option>
                 <option value="chemical-peel">Chemical Peel · 30 min</option>
                 <option value="microneedling">Microneedling · 45 min</option>
                 <option value="wart-removal">Wart &amp; Mole Removal · 15–30 min</option>
@@ -353,6 +384,7 @@
                 <option value="swedish">Swedish · 60 min</option>
                 <option value="deep-tissue">Deep Tissue · 60 min</option>
                 <option value="post-flight">Post-Flight Recovery · 90 min</option>
+                <option value="mani-pedi">Mani / Pedi · 60 min</option>
               </optgroup>
             </select>
           </div>

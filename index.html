@@ -174,7 +174,7 @@
   <!-- Concept switcher banner -->
   <a href="iterations.html" class="concept-banner" aria-label="View other design concepts">
     <span class="concept-banner-pulse"></span>
-    <span class="concept-banner-text"><strong>Concept 01 · Modern Gold</strong> — Compare all three design directions</span>
+    <span class="concept-banner-text"><strong>Concept 01 · Modern Gold</strong> — Compare all four design directions</span>
     <span class="concept-banner-arrow">→</span>
   </a>
 
@@ -186,10 +186,10 @@
       </a>
       <nav class="nav" id="nav" aria-label="Main navigation">
         <a href="#about" class="nav-link">About</a>
+        <a href="#promos" class="nav-link nav-link--accent">♡ Specials</a>
         <a href="#services" class="nav-link">Services</a>
         <a href="#membership" class="nav-link">Gold Circle</a>
         <a href="journal/" class="nav-link">Journal</a>
-        <a href="#faq" class="nav-link">FAQ</a>
         <a href="#contact" class="nav-link">Contact</a>
         <a href="#booking" class="nav-link nav-cta">Book Now</a>
       </nav>
@@ -303,6 +303,19 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Promotions / Mother's Day specials -->
+    <section class="promos" id="promos">
+      <div class="container">
+        <div class="section-header scroll-reveal">
+          <span class="section-tag">Mother's Day · 2026</span>
+          <h2 class="section-title">For the Women<br>Who Built Us</h2>
+          <p class="section-desc">Three limited collections, prepared in collaboration with our atelier. Pricing valid through <strong>20 May 2026</strong>.</p>
+        </div>
+        <div class="promos-grid scroll-reveal" id="promosMount"></div>
+        <p class="promos-fineprint scroll-reveal">All promotional bookings remain subject to physician screening. Promos cannot be combined with Gold Circle member discounts.</p>
       </div>
     </section>
 
@@ -733,12 +746,55 @@
                 Choose Your Treatment
               </h3>
               <div class="booking-services" role="radiogroup" aria-label="Select a service">
+                <p class="booking-group-label">♡ Mother's Day Specials</p>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="promo-super-moms">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Smooth Secrets — for 2</span>
+                    <span class="booking-service-info">60 min · ₱1,880 (2 persons)</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="promo-slim-glow">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Slim, Glow &amp; Shine</span>
+                    <span class="booking-service-info">75 min · From ₱980</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="promo-timeless-glow">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Timeless Glow For Mom</span>
+                    <span class="booking-service-info">60 min · From ₱580</span>
+                  </span>
+                </label>
                 <p class="booking-group-label">Aesthetic Treatments</p>
                 <label class="booking-service-option">
                   <input type="radio" name="service" value="botox" required>
                   <span class="booking-service-radio">
                     <span class="booking-service-name">Botox</span>
                     <span class="booking-service-info">30 min · Consultation</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="hifu">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">HIFU Treatment</span>
+                    <span class="booking-service-info">60 min · From ₱5,380</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="rf-treatment">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">RF Treatment</span>
+                    <span class="booking-service-info">60 min · From ₱980</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="cavitation">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Cavitation</span>
+                    <span class="booking-service-info">45 min · From ₱800</span>
                   </span>
                 </label>
                 <label class="booking-service-option">
@@ -755,10 +811,32 @@
                     <span class="booking-service-info">60 min · Consultation</span>
                   </span>
                 </label>
+                <p class="booking-group-label">Laser</p>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="diode-laser">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Diode Laser Hair Removal</span>
+                    <span class="booking-service-info">30 min · From ₱500</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="pico-laser">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Pico Laser Whitening</span>
+                    <span class="booking-service-info">30 min · From ₱800</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="carbon-peel">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Carbon Laser Peel (Blackdoll)</span>
+                    <span class="booking-service-info">45 min · From ₱1,500</span>
+                  </span>
+                </label>
                 <label class="booking-service-option">
                   <input type="radio" name="service" value="laser">
                   <span class="booking-service-radio">
-                    <span class="booking-service-name">Laser Treatment</span>
+                    <span class="booking-service-name">Other Laser Treatments</span>
                     <span class="booking-service-info">30–60 min · From ₱500</span>
                   </span>
                 </label>
@@ -778,10 +856,24 @@
                 </label>
                 <p class="booking-group-label">Skin Care</p>
                 <label class="booking-service-option">
+                  <input type="radio" name="service" value="aurum-hydra">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Aurum Signature Hydrafacial · 24K Gold</span>
+                    <span class="booking-service-info">60 min · ₱2,380</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
                   <input type="radio" name="service" value="hydrafacial">
                   <span class="booking-service-radio">
                     <span class="booking-service-name">Hydrafacial</span>
                     <span class="booking-service-info">45 min · From ₱2,000</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="diamond-peel">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Diamond Peel</span>
+                    <span class="booking-service-info">30 min · From ₱580</span>
                   </span>
                 </label>
                 <label class="booking-service-option">
@@ -832,6 +924,13 @@
                   <span class="booking-service-radio">
                     <span class="booking-service-name">Post-Flight Recovery</span>
                     <span class="booking-service-info">90 min · ₱1,200</span>
+                  </span>
+                </label>
+                <label class="booking-service-option">
+                  <input type="radio" name="service" value="mani-pedi">
+                  <span class="booking-service-radio">
+                    <span class="booking-service-name">Mani / Pedi</span>
+                    <span class="booking-service-info">60 min · From ₱580</span>
                   </span>
                 </label>
               </div>

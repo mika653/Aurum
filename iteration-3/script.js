@@ -66,6 +66,69 @@
     });
   });
 
+  /* Render promos (Mother's Day) */
+  function renderPromos() {
+    const mount = $('#clPromosMount');
+    if (!mount || !Store.PROMOS) return;
+    mount.innerHTML = Store.PROMOS.map(p => `
+      <article class="cl-promo">
+        <div class="cl-promo-poster" style="background-image:url('../${p.image}');" role="img" aria-label="${p.title}">
+          <span class="cl-promo-occasion">${p.occasion}</span>
+        </div>
+        <div class="cl-promo-body">
+          <header class="cl-promo-headline">
+            <p class="cl-promo-kicker">${p.kicker}</p>
+            <h3 class="cl-promo-title">${p.title}</h3>
+            <span class="cl-promo-tagline">${p.tagline}</span>
+          </header>
+          <div class="cl-promo-pkgs">
+            ${p.packages.map(pkg => `
+              <div class="cl-promo-pkg">
+                <div class="cl-promo-pkg-head">
+                  <span class="cl-promo-pkg-no">No.${pkg.no}</span>
+                  <span class="cl-promo-pkg-name">${pkg.name}</span>
+                  ${pkg.price ? `<span class="cl-promo-pkg-price">${pkg.price}${pkg.subprice ? `<small>${pkg.subprice}</small>` : ''}</span>` : ''}
+                </div>
+                <ul class="cl-promo-pkg-extras">
+                  ${pkg.extras.map(x => `<li>${x}</li>`).join('')}
+                </ul>
+              </div>
+            `).join('')}
+          </div>
+          ${p.pillars ? `<div class="cl-promo-pillars">${p.pillars.map(x => `<span>${x}</span>`).join('')}</div>` : ''}
+          ${p.addon ? `
+            <div class="cl-promo-addon">
+              <div>
+                <strong>${p.addon.label}</strong>
+                <span class="cl-promo-addon-note">${p.addon.note}</span>
+              </div>
+              <span class="cl-promo-addon-price">${p.addon.price}</span>
+            </div>` : ''}
+          <p class="cl-promo-foot">${p.footer}</p>
+          <div class="cl-promo-cta">
+            <div class="cl-promo-headline-price">
+              <span class="cl-promo-price">${p.headlinePrice}</span>
+              <span class="cl-promo-price-note">${p.headlinePriceNote}</span>
+            </div>
+            <button class="cl-promo-book" data-promo="${p.bookKey}">Book →</button>
+          </div>
+        </div>
+      </article>
+    `).join('');
+    $$('.cl-promo-book', mount).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sel = $('#clService');
+        if (sel) sel.value = btn.dataset.promo;
+        const target = $('#book');
+        if (target) {
+          const offset = ($('#clNav')?.offsetHeight || 80) + 12;
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+  renderPromos();
+
   /* Render service grid */
   const grid = $('#clServiceGrid');
   function renderServices(filter = 'aesthetic') {

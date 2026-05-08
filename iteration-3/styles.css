@@ -402,6 +402,172 @@ button { font-family: inherit; cursor: pointer; }
 }
 .cl-link:hover { gap: 8px; }
 
+/* ----- PROMOTIONS (Mother's Day) ----- */
+.cl-promos { padding: 80px 0; background: var(--cl-paper); border-bottom: 1px solid var(--cl-line); }
+.cl-promos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 1080px) { .cl-promos-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.cl-promo {
+  background: var(--cl-white);
+  border: 1px solid var(--cl-line);
+  border-radius: var(--cl-r-xl);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: all .25s ease;
+}
+.cl-promo:hover { border-color: var(--cl-line-2); box-shadow: var(--cl-shadow-md); }
+
+.cl-promo-poster {
+  aspect-ratio: 4/5;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--cl-mist);
+  position: relative;
+  border-bottom: 1px solid var(--cl-line);
+}
+.cl-promo-occasion {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--cl-text);
+  color: var(--cl-gold-2);
+  font-family: var(--cl-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: var(--cl-r-sm);
+  border: 1px solid rgba(212,178,91,0.4);
+}
+
+.cl-promo-body { padding: 24px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
+.cl-promo-headline { padding-bottom: 14px; border-bottom: 1px solid var(--cl-line); }
+.cl-promo-kicker {
+  font-family: var(--cl-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cl-faint);
+  margin: 0 0 8px;
+}
+.cl-promo-title {
+  font-family: var(--cl-font);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--cl-text);
+  line-height: 1.05;
+}
+.cl-promo-tagline {
+  display: block;
+  margin-top: 2px;
+  font-style: italic;
+  color: var(--cl-mute);
+  font-size: 0.95rem;
+}
+.cl-promo-pkgs { display: flex; flex-direction: column; gap: 0; flex: 1; }
+.cl-promo-pkg {
+  padding: 14px 0;
+  border-top: 1px solid var(--cl-line);
+}
+.cl-promo-pkg:first-child { border-top: 0; padding-top: 4px; }
+.cl-promo-pkg-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.cl-promo-pkg-no {
+  font-family: var(--cl-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--cl-gold-d);
+  flex-shrink: 0;
+  background: rgba(182,143,58,0.1);
+  padding: 3px 8px;
+  border-radius: var(--cl-r-sm);
+}
+.cl-promo-pkg-name { font-size: 1rem; font-weight: 600; color: var(--cl-text); flex: 1; letter-spacing: -0.01em; }
+.cl-promo-pkg-price { font-family: var(--cl-mono); font-size: 0.85rem; color: var(--cl-text); font-weight: 500; white-space: nowrap; }
+.cl-promo-pkg-price small { display: block; font-size: 0.7rem; color: var(--cl-mute); }
+.cl-promo-pkg-extras { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+.cl-promo-pkg-extras li {
+  display: flex; gap: 6px; align-items: center;
+  font-size: 0.82rem;
+  color: var(--cl-mute);
+}
+.cl-promo-pkg-extras li::before {
+  content: '+';
+  color: var(--cl-gold);
+  font-family: var(--cl-mono);
+}
+
+.cl-promo-pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 10px;
+  background: var(--cl-text);
+  color: var(--cl-gold-2);
+  border-radius: var(--cl-r-sm);
+  font-family: var(--cl-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.cl-promo-pillars > span { padding: 0 4px; border-right: 1px solid rgba(212,178,91,0.3); line-height: 1.4; }
+.cl-promo-pillars > span:last-child { border-right: 0; }
+
+.cl-promo-addon {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px;
+  background: var(--cl-mist);
+  border-radius: var(--cl-r-sm);
+  font-size: 0.85rem;
+}
+.cl-promo-addon strong { display: block; color: var(--cl-text); }
+.cl-promo-addon-note { color: var(--cl-faint); font-size: 0.74rem; font-family: var(--cl-mono); }
+.cl-promo-addon-price { font-family: var(--cl-mono); color: var(--cl-gold-d); font-weight: 500; }
+
+.cl-promo-foot { margin: 0; font-size: 0.85rem; color: var(--cl-mute); font-style: italic; text-align: center; }
+
+.cl-promo-cta {
+  display: flex; align-items: end; justify-content: space-between; gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--cl-line);
+}
+.cl-promo-headline-price { display: flex; flex-direction: column; line-height: 1; }
+.cl-promo-price {
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--cl-text);
+  font-feature-settings: 'tnum';
+}
+.cl-promo-price-note { font-family: var(--cl-mono); font-size: 0.7rem; color: var(--cl-faint); margin-top: 4px; }
+.cl-promo-book {
+  background: var(--cl-text); color: var(--cl-white);
+  border: 0; border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.cl-promo-book:hover { background: var(--cl-gold-d); }
+
+.cl-promos-fineprint {
+  text-align: center;
+  font-size: 0.78rem;
+  font-family: var(--cl-mono);
+  color: var(--cl-faint);
+  margin: 24px auto 0;
+  max-width: 720px;
+}
+.cl-nav-feature { color: var(--cl-gold-d) !important; font-weight: 600; }
+
 /* ----- TRUST STRIP ----- */
 .cl-trust {
   background: var(--cl-text);
